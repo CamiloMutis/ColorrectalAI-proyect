@@ -1,0 +1,9 @@
+<script setup>
+import PageHead from '../components/PageHead.vue'
+const items=[
+ {date:'18 oct 2025',time:'10:42 a. m.',id:'A-DEMO-003',case:'Colonoscopia · Caso de práctica',count:3,confidence:'94.2%',label:'Alta',status:'Completado',note:'18 oct 2025, 10:43'},
+ {date:'17 oct 2025',time:'3:16 p. m.',id:'A-DEMO-002',case:'Colonoscopia · Caso de práctica',count:2,confidence:'91.8%',label:'Alta',status:'Completado',note:'17 oct 2025, 3:17'},
+ {date:'16 oct 2025',time:'9:08 a. m.',id:'A-DEMO-001',case:'Colonoscopia · Caso de práctica',count:4,confidence:'87.6%',label:'Media',status:'Completado',note:'16 oct 2025, 9:09'},
+]
+</script>
+<template><main class="page"><PageHead eyebrow="CUADERNO ACADÉMICO / HISTORIAL" title="Historial de interpretaciones" description="Revisa, filtra y consulta el detalle de tus análisis experimentales." action="Nueva interpretación"/><section class="stats"><article><span>▧</span><div><small>Interpretaciones guardadas</small><b>24</b></div><i>En tu cuaderno académico</i></article><article><span>◎</span><div><small>Imágenes analizadas</small><b>37</b></div><i>Entre todos los análisis</i></article><article><span>◷</span><div><small>Posibles regiones de interés</small><b>8</b></div><i>Sugeridas para revisión visual</i></article></section><section class="panel"><div class="filters"><input placeholder="⌕  Buscar por identificador, fecha o caso"/><button>▦　Seleccionar fechas</button><span>Los resultados corresponden a interpretaciones experimentales.</span></div><HistoryTable :items="items"/><footer class="pagination">Mostrando 3 de 24 interpretaciones <div><button>‹</button><button class="selected">1</button><button>2</button><button>3</button><button>…</button><button>8</button><button>›</button></div></footer></section><p class="disclaimer">ⓘ　ColorrectalAI es una herramienta académica experimental. Los resultados pueden contener errores y no constituyen un diagnóstico médico.</p></main></template>
