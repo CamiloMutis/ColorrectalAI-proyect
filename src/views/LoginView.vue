@@ -30,16 +30,17 @@ function submit() {
     introduction="Organiza imágenes, revisa regiones de interés y consulta tus análisis experimentales."
   >
     <!-- Formulario de acceso. @submit.prevent evita recargar y llama a submit(). -->
-    <form class="panel auth-form" @submit.prevent="submit">
+    <form class="auth-form" @submit.prevent="submit">
       <!-- Título del formulario y breve instrucción para el usuario. -->
       <div class="form-heading">
-        <p class="eyebrow">BIENVENIDO DE NUEVO</p>
-        <h1>Iniciar sesión</h1>
-        <p class="auth-intro">Ingresa a tu espacio de trabajo.</p>
+        <h1>Bienvenido de nuevo</h1>
       </div>
 
+      <!-- Enlace alterno bajo el título, como acceso rápido al registro. -->
+      <p class="auth-switch">¿Aún no tienes cuenta? <RouterLink to="/registro">Regístrate</RouterLink></p>
+
       <!-- Campo de correo, enlazado al estado reactivo email. -->
-      <label>
+      <label class="auth-field">
         Correo electrónico
         <input
           v-model="email"
@@ -51,7 +52,7 @@ function submit() {
       </label>
 
       <!-- Campo de contraseña para la cuenta existente. -->
-      <label>
+      <label class="auth-field">
         Contraseña
         <input
           v-model="password"
@@ -63,18 +64,19 @@ function submit() {
         />
       </label>
 
-      <!-- Enlace de recuperación provisional y espacio para errores de validación. -->
-      <RouterLink class="forgot-link" to="/acceso">¿Olvidaste tu contraseña?</RouterLink>
+      <!-- Mensaje de validación si faltan datos. -->
       <p v-if="error" class="form-error" role="alert">{{ error }}</p>
-
-      <!-- Envía el formulario o dirige a la pantalla de creación de cuenta. -->
-      <button class="button" type="submit">Entrar a mi cuenta <span>→</span></button>
-      <p class="auth-switch">¿Aún no tienes cuenta? <RouterLink to="/registro">Regístrate</RouterLink></p>
 
       <!-- Aviso de uso de datos de práctica. -->
       <small class="form-legal">
         Al continuar, confirmas que usarás esta plataforma con datos de práctica no identificables.
       </small>
+
+      <!-- Acción principal para enviar las credenciales de acceso. -->
+      <button class="button" type="submit">Entrar a mi cuenta <span>→</span></button>
+
+      <!-- Enlace visual de recuperación; todavía no tiene una pantalla propia. -->
+      <RouterLink class="forgot-link" to="/acceso">¿Olvidaste tu contraseña?</RouterLink>
     </form>
   </AuthLayout>
 </template>

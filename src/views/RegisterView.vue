@@ -9,6 +9,7 @@ const name = ref('')
 const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
+const legalAccepted = ref(false)
 const error = ref('')
 
 // Comprueba que los campos estén completos y que las contraseñas coincidan.
@@ -26,6 +27,11 @@ function submit() {
     return
   }
 
+  if (!legalAccepted.value) {
+    error.value = 'Debes aceptar el aviso legal para crear tu cuenta.'
+    return
+  }
+
   router.push('/inicio')
 }
 </script>
@@ -37,16 +43,17 @@ function submit() {
     introduction="Organiza imágenes, revisa regiones de interés y consulta tus análisis experimentales."
   >
     <!-- Formulario de registro. @submit.prevent evita recargar y llama a submit(). -->
-    <form class="panel auth-form" @submit.prevent="submit">
+    <form class="auth-form" @submit.prevent="submit">
       <!-- Encabezado propio de la pantalla de registro. -->
       <div class="form-heading">
-        <p class="eyebrow">NUEVA CUENTA</p>
         <h1>Crear cuenta</h1>
-        <p class="auth-intro">Completa tus datos para crear tu perfil académico.</p>
       </div>
 
+      <!-- Enlace alterno al inicio de sesión para cuentas existentes. -->
+      <p class="auth-switch">¿Ya tienes cuenta? <RouterLink to="/acceso">Inicia sesión</RouterLink></p>
+
       <!-- Nombre que se asociará a la cuenta nueva. -->
-      <label>
+      <label class="auth-field">
         Nombre completo
         <input
           v-model="name"
@@ -58,7 +65,7 @@ function submit() {
       </label>
 
       <!-- Correo que se usaría para identificar la cuenta. -->
-      <label>
+      <label class="auth-field">
         Correo electrónico
         <input
           v-model="email"
@@ -70,7 +77,7 @@ function submit() {
       </label>
 
       <!-- Contraseña nueva; el navegador solicita al menos ocho caracteres. -->
-      <label>
+      <label class="auth-field">
         Contraseña
         <input
           v-model="password"
@@ -83,7 +90,7 @@ function submit() {
       </label>
 
       <!-- Campo separado que permite comprobar que ambas contraseñas coincidan. -->
-      <label>
+      <label class="auth-field">
         Confirmar contraseña
         <input
           v-model="confirmPassword"
@@ -98,14 +105,42 @@ function submit() {
       <!-- Mensaje de error si falta algún dato o las contraseñas son distintas. -->
       <p v-if="error" class="form-error" role="alert">{{ error }}</p>
 
-      <!-- Envía el registro o lleva a la pantalla de inicio de sesión. -->
-      <button class="button" type="submit">Crear mi cuenta <span>→</span></button>
-      <p class="auth-switch">¿Ya tienes cuenta? <RouterLink to="/acceso">Inicia sesión</RouterLink></p>
+      <!-- Aceptación requerida; el texto forma parte del área clicable del checkbox. -->
+      <label class="legal-consent">
+        <input v-model="legalAccepted" type="checkbox" name="legalAccepted" required />
+        <span>
+          Entiendo que ColorrectalAI es una herramienta académica experimental, que sus resultados
+          no constituyen un diagnóstico médico y que deben ser interpretados por un profesional de salud.
+        </span>
+      </label>
 
-      <!-- Aviso de uso de datos de práctica. -->
-      <small class="form-legal">
-        Al continuar, confirmas que usarás esta plataforma con datos de práctica no identificables.
-      </small>
+      <!-- Acción principal para crear la cuenta. -->
+      <button class="button" type="submit">Crear mi cuenta <span>→</span></button>
     </form>
   </AuthLayout>
 </template>
+
+<style scoped>
+/* El consentimiento se alinea en dos columnas para que el texto no desplace la casilla. */
+.legal-consent {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.55;
+  cursor: pointer;
+}
+
+/* Tamaño y color propios para que el checkbox no herede el formato de los campos de texto. */
+.legal-consent input[type='checkbox'] {
+  width: 17px;
+  height: 17px;
+  margin: 2px 0 0;
+  padding: 0;
+  accent-color: var(--brand);
+  cursor: pointer;
+}
+</style>

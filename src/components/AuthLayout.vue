@@ -1,6 +1,4 @@
 <script setup>
-import BrandLogo from './BrandLogo.vue'
-
 defineProps({
   headline: { type: String, required: true },
   introduction: { type: String, required: true },
@@ -10,9 +8,8 @@ defineProps({
 <template>
   <main class="auth-page">
     <section class="auth-copy">
-      <RouterLink to="/" class="auth-logo">
-        <BrandLogo :tagline="true" />
-      </RouterLink>
+      <img class="auth-logo" src="../../public/img/Logotipo.png" alt="ColorrectalAI" />
+      <h3 class="ColorrectalAI">Colorrectal<span>AI</span></h3>
 
       <div class="auth-message">
         <p class="auth-kicker">COLORRECTALAI · PLATAFORMA ACADÉMICA</p>
@@ -48,77 +45,89 @@ defineProps({
 
 <style scoped>
 .auth-page {
-  position: relative;
-  isolation: isolate;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(370px, 0.82fr);
+  grid-template-columns: 60% 40%;
   align-items: stretch;
   width: 100%;
-  height: 100vh;
-  margin: 0 auto;
-}
-
-.auth-page::before {
-  position: fixed;
-  z-index: -1;
-  inset: 0 0 0;
-  content: '';
-  background: url('/img/FondoTecnologico.png') center / cover no-repeat;
-  filter: brightness(0.8) contrast(1) blur(2px);
+  min-height: 100svh;
 }
 
 .auth-copy {
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 0 100px;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding: clamp(36px, 5vw, 88px);
+  background:
+    linear-gradient(180deg, #071e3621 0%, #071e3633 42%, #071e36d9 100%),
+    url('/img/FondoTecnologico.png') center / cover no-repeat;
 }
 
 .auth-logo {
-  align-self: flex-start;
+  width: 80px;
+  position: absolute;
+  top: clamp(28px, 60px, 100px);
+  left: clamp(36px, 70px, 88px);
   text-decoration: none;
 }
 
-.auth-message {
-  max-width: 460px;
-  margin: 38px 0 26px;
+.ColorrectalAI {
+  position: absolute;
+  top: clamp(28px, 55px, 150px);
+  left: clamp(36px, 150px, 250px);
+  color: #fff;
+  font-size: 25px;
+  font-weight: 700;
+}
 
+.ColorrectalAI span {
+  color: #00abf5;
+}
+
+.auth-message {
+  max-width: 580px;
+  margin: auto 0 24px;
 }
 
 .auth-kicker {
   margin: 0 0 12px;
   color: #6bd6ee;
-  font-size: 9px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.437);
 }
 
 .auth-message h2 {
   margin: 0 0 12px;
   color: #fff;
-  font-size: clamp(25px, 3vw, 35px);
+  font-size: clamp(32px, 4vw, 50px);
   line-height: 1.16;
-  letter-spacing: -0.7px;
+  letter-spacing: -1.2px;
 }
 
 .auth-message > p:last-child {
-  max-width: 400px;
+  max-width: 500px;
   margin: 0;
-  color: #c1d4e1;
-  font-size: 12px;
-  line-height: 1.65;
+  color: #e0edf5;
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 .auth-benefits {
   display: grid;
-  gap: 9px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .auth-benefits > div {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  min-height: 104px;
+  padding: 13px;
   border: 1px solid #ffffff1b;
   border-radius: 6px;
   background: #ffffff0a;
@@ -133,7 +142,7 @@ defineProps({
   border-radius: 50%;
   background: #00abf526;
   color: #76ddf0;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -145,93 +154,92 @@ defineProps({
 
 .auth-benefits b {
   color: #fff;
-  font-size: 11px;
+  font-size: 15px;
 }
 
 .auth-benefits small {
   color: #b4c9d7;
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .auth-disclaimer {
-  max-width: 410px;
-  margin: 20px 0 0;
+  max-width: 540px;
+  margin: 18px 0 0;
   color: #adc1cf;
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.6;
 }
 
 .auth-panel {
-  width: 80%;
-  height: 100%;
+  display: grid;
+  min-width: 0;
+  place-items: center;
+  padding: clamp(30px, 4vw, 72px);
   background: #fff;
 }
 
 .auth-panel :deep(.auth-form) {
+  width: min(100%, 460px);
+  min-height: min(80svh, 680px);
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: clamp(25px, 3vw, 38px);
+  justify-content: space-between;
+  gap: clamp(12px, 1.8vh, 20px);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .auth-panel :deep(.form-heading) {
-  margin-bottom: 3px;
-}
-
-.auth-panel :deep(.form-heading .eyebrow) {
-  margin-bottom: 8px;
+  margin-bottom: 0;
+  text-align: center;
 }
 
 .auth-panel :deep(.form-heading h1) {
   margin: 0;
   color: var(--navy-deep);
-  font-size: 27px;
-  letter-spacing: -0.6px;
+  font-size: clamp(27px, 2.5vw, 34px);
+  letter-spacing: -0.8px;
 }
 
-.auth-panel :deep(.auth-intro) {
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.5;
-}
-
-.auth-panel :deep(.auth-form label) {
+.auth-panel :deep(.auth-form .auth-field) {
   display: block;
   color: #34536d;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
 }
 
-.auth-panel :deep(.auth-form input) {
+.auth-panel :deep(.auth-form .auth-field input) {
   display: block;
   width: 100%;
-  height: 43px;
-  margin-top: 6px;
-  padding: 0 12px;
+  height: 50px;
+  margin-top: 8px;
+  padding: 0 14px;
   border: 1px solid #d2dfe7;
-  border-radius: 5px;
+  border-radius: 8px;
   background: #fcfdfe;
   color: var(--ink);
-  font-size: 11px;
+  font-size: 13px;
   outline: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.auth-panel :deep(.auth-form input::placeholder) {
+.auth-panel :deep(.auth-form .auth-field input::placeholder) {
   color: #97a8b5;
 }
 
-.auth-panel :deep(.auth-form input:focus) {
+.auth-panel :deep(.auth-form .auth-field input:focus) {
   border-color: var(--brand);
   box-shadow: 0 0 0 3px #087fa81a;
 }
 
 .auth-panel :deep(.forgot-link) {
-  align-self: flex-end;
-  margin-top: -8px;
+  align-self: center;
+  margin-top: 0;
   color: var(--brand);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   text-decoration: none;
 }
@@ -249,13 +257,15 @@ defineProps({
 
 .auth-panel :deep(.auth-form > .button) {
   width: 100%;
-  margin-top: 2px;
+  min-height: 50px;
+  margin-top: 0;
+  border-radius: 999px;
 }
 
 .auth-panel :deep(.auth-switch) {
   margin: 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
   text-align: center;
 }
 
@@ -266,67 +276,91 @@ defineProps({
 }
 
 .auth-panel :deep(.form-legal) {
+  display: block;
+  max-width: 100%;
   color: var(--quiet);
-  font-size: 9px;
-  line-height: 1.55;
-  text-align: center;
+  font-size: 11px;
+  line-height: 1.6;
+  text-align: left;
 }
 
-@media (max-width: 850px) {
-  .auth-page {
-    grid-template-columns: minmax(0, 0.9fr) minmax(340px, 0.85fr);
-    width: min(100% - 36px, 760px);
-    gap: 18px;
-  }
-
+@media (max-width: 900px) {
   .auth-copy {
-    padding: 24px;
+    padding: 36px;
   }
 
-  .auth-panel :deep(.auth-form) {
-    padding: 24px;
-  }
-
-  .auth-benefits > div {
-    padding: 8px;
+  .auth-panel {
+    padding: 30px;
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 700px) {
   .auth-page {
-    width: min(100% - 28px, 480px);
-    min-height: auto;
     grid-template-columns: 1fr;
-    gap: 14px;
-    padding: 18px 0 28px;
-  }
-
-  .auth-page::before {
-    inset: 64px 0 0;
+    grid-template-rows: auto 1fr;
   }
 
   .auth-copy {
-    padding: 22px;
+    min-height: 390px;
+    padding: 92px 24px 24px;
+  }
+
+  .auth-logo {
+    top: 24px;
+    left: 24px;
   }
 
   .auth-message {
-    margin: 25px 0 18px;
+    margin: 0 0 16px;
   }
 
   .auth-message h2 {
-    font-size: 26px;
+    font-size: 30px;
+  }
+
+  .auth-message > p:last-child {
+    font-size: 13px;
   }
 
   .auth-benefits {
-    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .auth-benefits > div {
+    min-height: 0;
+    gap: 6px;
+    padding: 9px;
+  }
+
+  .auth-benefits b {
+    font-size: 9px;
+  }
+
+  .auth-benefits small {
+    font-size: 8px;
   }
 
   .auth-disclaimer {
-    margin-top: 14px;
+    margin-top: 12px;
+  }
+
+  .auth-panel {
+    min-height: 540px;
+    padding: 34px 24px 42px;
   }
 
   .auth-panel :deep(.auth-form) {
-    padding: 23px;
+    min-height: 0;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 701px) {
+  .auth-panel :deep(.auth-form) {
+    min-height: 0;
+    justify-content: center;
+    gap: 15px;
   }
 }
 </style>
